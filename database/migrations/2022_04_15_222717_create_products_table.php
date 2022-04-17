@@ -21,6 +21,8 @@ return new class extends Migration
             $table->decimal('sale price')->nullable();
             $table->string('image');
             $table->string('images')->nullable();
+            $table->bigInteger('category_id')->nullable()->unsigned();
+            $table->bigInteger('brands_id')->nullable()->unsigned();
             $table->timestamps();
         });
     }
