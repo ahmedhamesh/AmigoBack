@@ -6,14 +6,18 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Brands extends Model
+class Brand extends Model
 {
     use HasFactory;
 
     protected $table = 'brands';
 
+    protected $fillable = [
+      'name',
+    ];
+
     public function brands()
     {
-        return $this->hasMany(Products::class,'brands_id');
+        return $this->hasMany(Product::class,'brand_id');
     }
 }

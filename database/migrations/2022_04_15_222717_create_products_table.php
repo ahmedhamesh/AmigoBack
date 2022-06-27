@@ -17,11 +17,12 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->text('description')->nullable();
-            $table->decimal('price');
-            $table->decimal('sale price')->nullable();
+            $table->decimal('price')->nullable();
+            $table->decimal('sale_price')->nullable();
             $table->string('image');
             $table->string('images')->nullable();
             $table->bigInteger('category_id')->nullable()->unsigned();
+            $table->bigInteger('country_id');
             $table->bigInteger('brands_id')->nullable()->unsigned();
             $table->timestamps();
         });

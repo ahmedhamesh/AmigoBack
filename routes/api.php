@@ -1,9 +1,14 @@
 <?php
 
+use App\Http\Controllers\BrandsController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\CountryController;
+use App\Http\Controllers\ProductController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
+
 /*
 |--------------------------------------------------------------------------
 | API Routes
@@ -15,15 +20,36 @@ use App\Models\User;
 |
 */
 
-Route::post('/auth/register',[AuthController::class,'register']);
-Route::post('/auth/login',[AuthController::class,'login']);
 
-Route::group(['middleware'=>['auth:sanctum']],function (){
+Route::post('/auth/login', [AuthController::class, 'login']);
 
-    Route::get('/me',function (Request $request){
+Route::group(['middleware' => ['auth:sanctum']], function () {
+
+    Route::post('/auth/register', [AuthController::class, 'register']);
+    Route::get('/me', function (Request $request) {
         return auth()->user();
     });
-    Route::post('/auth/logout',[AuthController::class,'logout']);
+    Route::post('/auth/logout', [AuthController::class, 'logout']);
+    Route::get('/list', [AuthController::class, 'list']);
 
-    Route::get('/list',[AuthController::class,'list']);
 });
+Route::get('/products', [ProductController::class, 'index']);
+Route::post('/products', [ProductController::class, 'store']);
+Route::put('/products/{id}',[ProductController::class,'update']);
+Route::delete('/products/{id}',[ProductController::class , 'destroy']);
+
+
+Route::get('/categories', [CategoryController::class, 'index']);
+Route::post('/categories', [CategoryController::class, 'addCategory']);
+Route::put('/categories/{id}' , [CategoryController::class , 'update']);
+Route::delete('/categories/{id}',[CategoryController::class , 'destroy']);
+
+Route::get('/brands', [BrandsController::class , 'index']);
+Route::post('/brands', [BrandsController::class, 'addBrand']);
+Route::put('/brands/{id}' , [BrandsController::class , 'update']);
+Route::delete('/brands/{id}',[BrandsController::class , 'destroy']);
+
+Route::get('/countries', [CountryController::class , 'index']);
+Route::post('/countries', [CountryController::class, 'addCountry']);
+Route::put('/countries/{id}' , [CountryController::class , 'update']);
+Route::delete('/countries/{id}',[CountryController::class , 'destroy']);
