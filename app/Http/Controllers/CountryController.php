@@ -11,29 +11,14 @@ class CountryController extends Controller
     {
         return Country::all();
     }
-
-    public function addCountry(Request $request)
-    {
-        $attr = $request->validate([
-            'name' => 'required|string|max:255|unique:countries',
-        ]);
-        $country = Country::query()->create(['name' => $attr['name']]);
-        return response()->json([
-            'status' => 'success',
-            'message' => 'successful registered',
-        ]);
-    }
-
     public function update(Request $request, $id)
     {
-        $country = Country::query()->find($id);
-        $country->update($request->all());
-        return $country;
-    }
+        return Country::where('id', $id)->update($request->all());
 
-    public function destroy($id)
+    }
+    public function avilableCountries()
     {
-        return Country::destroy($id);
+        return Country::query()->where('status' , [1])->get();
     }
 
 }

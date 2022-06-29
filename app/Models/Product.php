@@ -30,4 +30,8 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class,'category_id');
     }
+
+    public function countries(){
+        return $this->belongsToMany(Country::class, 'product_countries');
+    }
 }

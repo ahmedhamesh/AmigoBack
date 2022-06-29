@@ -5,6 +5,7 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\CountryController;
 use App\Http\Controllers\ProductController;
+use App\Http\Controllers\S_CountryController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Models\User;
@@ -50,6 +51,11 @@ Route::put('/brands/{id}' , [BrandsController::class , 'update']);
 Route::delete('/brands/{id}',[BrandsController::class , 'destroy']);
 
 Route::get('/countries', [CountryController::class , 'index']);
-Route::post('/countries', [CountryController::class, 'addCountry']);
-Route::put('/countries/{id}' , [CountryController::class , 'update']);
-Route::delete('/countries/{id}',[CountryController::class , 'destroy']);
+Route::put('/countries/{id}', [CountryController::class , 'update']);
+Route::get('/countries/available',[CountryController::class,'avilableCountries']);
+
+
+
+
+
+
